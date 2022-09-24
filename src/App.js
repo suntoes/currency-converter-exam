@@ -1,9 +1,8 @@
-import { Container, Divider, Heading, Input, Button } from "@chakra-ui/react"
-import { AnimatePresence } from "framer-motion";
-import React, { useEffect, useState } from "react"
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Container, Divider } from "@chakra-ui/react"
+import React from "react"
+import { BrowserRouter  } from "react-router-dom";
 import Header from "./components/header";
-import Login from "./compositions/login"
+import AnimatedRoutes from "./AnimatedRoutes"
 
 function App() {
   
@@ -13,14 +12,7 @@ function App() {
         <Header />
         <Divider/>
         <BrowserRouter>
-          <AnimatePresence exitBeforeEnter>
-            <Routes>
-              <Route path="/" element={<Login />} />
-              <Route path="/branch" element={<>OLOL</>} />
-              <Route path="/branch/:city" element={<></>} />
-              <Route path="*" element={<Login />} />
-            </Routes>
-          </AnimatePresence>
+          <AnimatedRoutes/>
         </BrowserRouter>
       </Container>
     </>

@@ -1,5 +1,6 @@
 import {Heading} from "@chakra-ui/react"
 import React, { useEffect, useState } from "react"
+import ThemeButton from "./theme-button"
 
 function Header() {
   const [title, setTitle] = useState("")
@@ -33,7 +34,10 @@ function Header() {
     }
   }, [])
   
-  return <Heading my={10}>{title}</Heading>
+  return <>
+    <Heading fontSize={24} my={10}>{title}</Heading>
+    <ThemeButton/>
+  </>
 }
 
 export default Header;

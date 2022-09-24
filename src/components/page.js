@@ -9,7 +9,7 @@ const Page = (props) => (
         exit={{ y: 20, opacity: 0 }}
         transition={{ duration: 1 }}
       >
-        <Container {...props} my={10} />
+        <Container {...props} my={10} centerContent/>
       </motion.div>
 )
 

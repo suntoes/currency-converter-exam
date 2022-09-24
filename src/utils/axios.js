@@ -1,11 +1,22 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:8080/api/",
+  baseURL: "https://coffee-dojo-api.onrender.com/api/",
   headers: {
     "Content-type": "application/json"
   }
 });
+
+export async function getDataById({data, callback}) {
+  const {id} = data
+  try {
+    const res = await apiClient.get("/ig/branch/" + id)
+
+    callback(res)
+  } catch (err) {
+    callback(false)
+  }
+}
 
 export async function getAllData({callback}) {
   try {
@@ -49,7 +60,7 @@ export async function putData({data, callback}) {
   const {id} = data;
 
   try {
-    const res = await apiClient.put(`/update/${id}`, data, {
+    const res = await apiClient.put(`/admin/update/${id}`, data, {
       headers: {
         "x-access-token": "token-value",
       },
@@ -65,7 +76,11 @@ export async function deleteDataById({data, callback}) {
   const {id} = data;
 
   try {
-    const res = await apiClient.delete(`/delete/${id}`);
+    const res = await apiClient.put(`/admin/delete/${id}`, data, {
+      headers: {
+        "x-access-token": "token-value",
+      },
+    });
 
     callback(res)
   } catch (err) {

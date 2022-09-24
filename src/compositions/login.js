@@ -1,5 +1,5 @@
 import { Input, Button } from "@chakra-ui/react"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import {useNavigate} from "react-router-dom"
 import { adminLogin } from "../utils/axios"
 import Page from "../components/page"
@@ -9,6 +9,21 @@ function Login() {
   const [input, setInput] = useState("")
   const [inputIsInvalid, setInputIsInvalid] = useState(false)
   const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    const storedKey = sessionStorage.getItem("key");
+
+    const detectLogCallback = (res) => {
+      if(res?.status === 200) {
+        navigate("/branch")
+        console.log("detected login")
+      }
+    } 
+    adminLogin({
+      data: {code: storedKey},
+      callback: detectLogCallback
+    })
+  }, [])
 
   const handleInput = (e) => {
     setInputIsInvalid(false)

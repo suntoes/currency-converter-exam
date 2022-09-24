@@ -9,11 +9,20 @@ const styles = {
   })
 }
 
+const components = {
+  Link: {
+    baseStyle: (props) => ({
+      color: mode('#0c3455', '#e9e29f')(props),
+      textUnderlineOffset: 3
+    })
+  }
+}
+
 const config = {
   initialColorMode: 'dark',
   useSystemColorMode: true
 }
 
-const theme = extendTheme({ config, styles});
+const theme = extendTheme({ config, components, styles});
 
 export default theme
