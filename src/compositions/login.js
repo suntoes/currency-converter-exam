@@ -50,7 +50,8 @@ function Login() {
   return (
     <Page>
         <Input 
-        value={input} 
+        value={input}
+		type={"password"}
         onInput={handleInput} 
         mb={5} 
         placeholder="Enter Code" 

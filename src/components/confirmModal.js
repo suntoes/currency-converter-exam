@@ -37,7 +37,8 @@ export function ConfirmKeyModal({isOpen, onClose, title, body, action, callback}
                 <InputGroup mt={5}>
                     <InputLeftAddon children="Key" />
                     <Input 
-                        value={input}
+                        value={input
+						type={"password"}
                         onInput={e => setInput(e.target.value)}
                         placeholder="Key here"
                     />
