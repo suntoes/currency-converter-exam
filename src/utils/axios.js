@@ -1,89 +1,44 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "https://coffee-dojo-api.onrender.com/api/",
+  baseURL: "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/",
   headers: {
     "Content-type": "application/json"
   }
 });
 
-export async function getDataById({data, callback}) {
-  const {id} = data
+async function getExchangeRate({from, to, callback}) {
   try {
-    const res = await apiClient.get("/ig/branch/" + id)
+    // in-function lowerCase() for the func to be not case-sensitive
+    const res = await apiClient.get("/" + from?.toLowerCase() + "/" + to?.toLowerCase() + ".json")
 
-    callback(res)
+    // return specific result rate
+    callback(res?.data[to?.toLowerCase()])
   } catch (err) {
     callback(false)
   }
 }
 
-export async function getAllData({callback}) {
-  try {
-    const res = await apiClient.get("/ig/branches");
+export async function recursiveGetAllRates(data, callback, logProcess=()=>{}, count=0) {
+  // listener callback for recursion progress
+  logProcess(count / data.length)
+
+  // return callback function if finished
+  if(count >= data.length) return callback(data)
+
+  const reqCallback = async(res) => {
+    if(!res) return callback(false)
+
+    // modify data
+    data[count] = {...data[count], rate: res}
     
-    callback(res)
-  } catch (err) {
-    callback(false)
+    // recurse this function with incremented count
+    await recursiveGetAllRates(data, callback, logProcess, count + 1)
   }
-}
 
-export async function adminLogin({data, callback}) {
-  try {
-    const res = await apiClient.post("/admin/login", data, {
-      headers: {
-        "x-access-token": "token-value",
-      },
-    });
-
-    callback(res)
-  } catch (err) {
-    callback(false)
-  }
-}
-
-export async function postData({data, callback}) {
-  try {
-    const res = await apiClient.post("/admin/create", data, {
-      headers: {
-        "x-access-token": "token-value",
-      },
-    });
-
-    callback(res)
-  } catch (err) {
-    callback(false)
-  }
-}
-
-export async function putData({data, callback}) {
-  const {id} = data;
-
-  try {
-    const res = await apiClient.put(`/admin/update/${id}`, data, {
-      headers: {
-        "x-access-token": "token-value",
-      },
-    });
-
-    callback(res)
-  } catch (err) {
-    callback(false)
-  }
-}
-
-export async function deleteDataById({data, callback}) {
-  const {id} = data;
-
-  try {
-    const res = await apiClient.put(`/admin/delete/${id}`, data, {
-      headers: {
-        "x-access-token": "token-value",
-      },
-    });
-
-    callback(res)
-  } catch (err) {
-    callback(false)
-  }
+  await getExchangeRate({
+    from: data[count]?.from?.currency,
+    to: data[count]?.to?.currency,
+    callback: reqCallback
+  })
 }

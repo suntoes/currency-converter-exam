@@ -1,5 +1,5 @@
 import { Container } from '@chakra-ui/react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 const Page = (props) => (
       <motion.div
@@ -9,7 +9,7 @@ const Page = (props) => (
         exit={{ y: 20, opacity: 0 }}
         transition={{ duration: 1 }}
       >
-        <Container {...props} my={10} centerContent/>
+        <Container {...props} maxW="container.lg" centerContent />
       </motion.div>
 )
 

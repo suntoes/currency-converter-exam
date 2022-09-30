@@ -1,12 +1,11 @@
-import {Heading} from "@chakra-ui/react"
+import { Heading } from "@chakra-ui/react"
 import React, { useEffect, useState } from "react"
 import ThemeButton from "./theme-button"
 
 function Header() {
-  const [title, setTitle] = useState("")
+  const [randomEmoj, setRandomEmoj] = useState("")
   
   useEffect(() => {
-    const hourNow = new Date().getHours()
     const emojis = [
       "(✿◠‿◠)",
       "(づ｡◕‿‿◕｡)づ",
@@ -18,24 +17,13 @@ function Header() {
       "＼(^o^)／"
     ]
     const randomEmojiIndex = Math.floor(Math.random() * ((emojis.length-1) - 0 + 1) + 0)
-    switch(true) 
-    {
-      case hourNow < 24 && hourNow >= 18:
-        setTitle("Konbanwa " + emojis[randomEmojiIndex])
-        break;
-      case hourNow < 18 && hourNow >= 12:
-        setTitle("Kon'nichiwa " + emojis[randomEmojiIndex])
-        break;
-      case hourNow < 12:
-        setTitle("Ohayou gozaimasu " + emojis[randomEmojiIndex])
-        break
-      default:
-        break;
-    }
+
+    setRandomEmoj(" " + emojis[randomEmojiIndex])
   }, [])
   
   return <>
-    <Heading fontSize={24} my={10}>{title}</Heading>
+    <Heading textAlign="center" fontSize={24} mt={10}>Modified API-based Currency Converter Exam</Heading>
+    <Heading fontSize={24} mb={10}>{randomEmoj}</Heading>
     <ThemeButton/>
   </>
 }

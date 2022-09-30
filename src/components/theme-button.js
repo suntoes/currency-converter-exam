@@ -1,6 +1,13 @@
 import { motion } from 'framer-motion'
-import { IconButton, useColorMode, useColorModeValue } from '@chakra-ui/react'
+
+import { 
+  IconButton, 
+  useColorMode, 
+  useColorModeValue 
+} from '@chakra-ui/react'
+
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
+
 const ThemeButton = () => {
   const { toggleColorMode } = useColorMode()
 
@@ -16,7 +23,7 @@ const ThemeButton = () => {
     >
       <IconButton
         aria-label="toggle theme"
-        transform={{base: "translateX(180px)", md: "translateX(210px)"}}
+        transform={{base: "translateX(180px)", sm: "translateX(200px)", md: "translateX(320px)", lg: "translateX(400px)"}}
         bg={useColorModeValue('#0c3455', '#e9e29f')}
         borderRadius={0}
         color={useColorModeValue('white', '#1c1c1f')}
