@@ -22,7 +22,7 @@ const CurrencyInput = ({selectedCurrency, input, onInputChange, onDropdownChange
     <Container maxW="full" centerContent>
       <Stack direction="row">
         <Menu>
-          <MenuButton as={Button} width="111px" leftIcon={<Image src={selectedCurrency?.emoji}/>} rightIcon={<ChevronDownIcon />}>
+          <MenuButton as={Button} minWidth="111px" width="111px" leftIcon={<Image src={selectedCurrency?.emoji}/>} rightIcon={<ChevronDownIcon />}>
             {selectedCurrency?.currency}
           </MenuButton>
           <MenuList width="111px" minWidth="111px">
