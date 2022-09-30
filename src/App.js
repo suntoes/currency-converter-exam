@@ -60,7 +60,7 @@ function App() {
       }
 
       // Local cache condition
-      if(!localExchangeList || !localLastFetchDate) return fetchNew()
+      if(!localExchangeList || !localLastFetchDate) fetchNew()
       else checkOld()
     }
   }, [])
